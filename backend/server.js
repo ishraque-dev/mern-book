@@ -1,14 +1,23 @@
-const express = require('express');
 // eslint-disable-next-line import/no-extraneous-dependencies
-const app = express();
+const mongoose = require('mongoose');
 const cors = require('cors');
-const { readdirSync } = require('fs');
+const app = require('./app');
+require('dotenv').config();
 
 app.use(cors());
 
-const routeDir = readdirSync(`${__dirname}/routes`);
-// eslint-disable-next-line global-require
-routeDir.forEach((f) => app.use('/api', require(`./routes/${f}`)));
-app.listen(8000, () => {
+const DB = process.env.DB.replace('<password>', process.env.DB_PASSWORD);
+const port = process.env.PORT || 8000;
+
+(async function () {
+  try {
+    await mongoose.connect(DB);
+    console.log('Connected to database');
+  } catch (error) {
+    console.log(error);
+  }
+})();
+
+app.listen(port, () => {
   console.log('listening on port 8000');
 });
