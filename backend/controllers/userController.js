@@ -1,4 +1,6 @@
 const User = require('../models/User');
+const passwordHashing = require('../functions/hashPassword');
+const generateUsername = require('../functions/generateUsername');
 
 exports.usernameValidation = function (req, res, next) {
   if (req.body.firstName.length > 15 || req.body.firstName.length < 3) {
@@ -41,11 +43,15 @@ exports.signup = async function (req, res, next) {
       birthday,
       verified,
     } = req.body;
+
+    const encryptedPassword = await passwordHashing(password);
+    const username = await generateUsername(firstName);
     const user = await User.create({
       firstName,
       lastName,
+      username,
       email,
-      password,
+      password: encryptedPassword,
       gender,
       birthYear,
       birthMonth,
