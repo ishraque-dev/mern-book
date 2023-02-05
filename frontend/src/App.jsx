@@ -1,9 +1,11 @@
+import Registration from './pages/Registration';
+
 function App() {
   return (
     <div className="App">
-      <i className="friends_suggestions_icon"></i>
+      {/* <i className="friends_suggestions_icon"></i> */}
 
-      <h4 className="bg-black text-white">hello</h4>
+      <Registration />
     </div>
   );
 }

@@ -12,3 +12,6 @@
   --secondary-white: #ececec;
   --primary-bg-white: #f7f7fb;
 }
+body {
+  background: var(--primary-bg-white);
+}
