@@ -24,6 +24,9 @@ module.exports = {
         '4xl': '2.441rem',
         '5xl': '3.052rem',
       },
+      fontFamily: {
+        primary: "'Noto Sans', sans-serif",
+      },
       container: {
         center: true,
       },

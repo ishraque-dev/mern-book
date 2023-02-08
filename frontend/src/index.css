@@ -10,8 +10,9 @@
   --primary-purple: #615dfa;
   --primary-white: #fff;
   --secondary-white: #ececec;
-  --primary-bg-white: #f7f7fb;
+  --primary-bg-white: #fafbfd;
 }
 body {
   background: var(--primary-bg-white);
+  font-family: 'Noto Sans', sans-serif;
 }

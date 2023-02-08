@@ -1,23 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from '../../components';
+import usePageTitle from '../../hooks/usePageTitle';
 import {
   generateDates,
   generateMonths,
   generateYear,
 } from '../../functions/generateItems';
+import signup from '../../../public/imgs/signup.png';
 function Registration() {
+  usePageTitle('Signup');
   const dates = generateDates();
   const months = generateMonths();
   const years = generateYear();
-  console.log(years);
   return (
-    <div className="h container  flex h-screen w-full items-center ">
-      <div className="flex h-1/2 w-1/2 items-start justify-center">
-        <div className="text-5xl font-bold text-primaryBlue">mernbook</div>
+    <div className="flex h-screen w-full flex-wrap  items-center p-5 lg:justify-around">
+      <div className="flex w-1/2 flex-col items-start lg:items-center lg:justify-center">
+        <div className="mb-5  text-2xl font-bold text-primaryBlue lg:mb-10 lg:text-7xl">
+          mernbook
+        </div>
+        <img src={signup} alt="" className="hidden md:block lg:block" />
+        <small className="hidden font-medium text-primaryBlue md:block lg:mt-20 lg:block">
+          Mernbook helps you connect and share with the people in your life.
+          Signup now!
+        </small>
       </div>
-      <div className="flex flex-col gap-3">
-        <h2 className="text-2xl font-bold text-[#20262E]">Registration</h2>
+      <div className="flex flex-col gap-2 lg:w-[30%]">
+        <h2 className="font-base text-2xl text-[#20262E]">Signup</h2>
         <Input
           input={{
             placeholder: 'Your first name',
@@ -41,7 +50,7 @@ function Registration() {
             type: 'password',
           }}
         />
-        <h3 className="text-xl font-medium">Date of Birth</h3>
+        <h3 className="text-base font-medium">Date of Birth</h3>
         <div className="flex w-[300px] justify-between">
           <select
             name=""
@@ -71,7 +80,7 @@ function Registration() {
             ))}
           </select>
         </div>
-        <h3 className="text-xl font-medium">Gender</h3>
+        <h3 className="text-base font-medium">Gender</h3>
         <div className="flex w-[300px] justify-between">
           <div className="flex items-center">
             <input
