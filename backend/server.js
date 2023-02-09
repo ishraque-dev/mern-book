@@ -1,10 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const mongoose = require('mongoose');
-const cors = require('cors');
+
 const app = require('./app');
 require('dotenv').config();
-
-app.use(cors());
 
 const DB = process.env.DB.replace('<password>', process.env.DB_PASSWORD);
 const port = process.env.PORT || 8000;

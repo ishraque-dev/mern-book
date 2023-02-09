@@ -28,6 +28,6 @@ function generateYear() {
   for (let i = 1950; i <= currentYear; i++) {
     years.push(i);
   }
-  return years;
+  return years.sort((a, b) => b - a);
 }
 export { generateDates, generateMonths, generateYear };

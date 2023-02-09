@@ -1,7 +1,9 @@
+const cors = require('cors');
 const express = require('express');
 const { readdirSync } = require('fs');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 const routeDir = readdirSync(`${__dirname}/routes`);
 // eslint-disable-next-line global-require

@@ -45,19 +45,19 @@ const userSchema = mongoose.Schema(
       required: [true, 'Gender is required'],
     },
     birthYear: {
-      type: Number,
+      type: String,
       trim: true,
-      required: [true, 'Year is required'],
+      // required: [true, 'Year is required'],
     },
     birthMonth: {
-      type: Number,
+      type: String,
       trim: true,
-      required: [true, 'Month is required'],
+      // required: [true, 'Month is required'],
     },
-    birthday: {
-      type: Number,
+    birthDate: {
+      type: String,
       trim: true,
-      required: [true, 'Day is required'],
+      // required: true,
     },
     verified: {
       type: Boolean,

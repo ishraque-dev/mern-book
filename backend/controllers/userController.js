@@ -40,7 +40,7 @@ exports.signup = async function (req, res, next) {
       gender,
       birthYear,
       birthMonth,
-      birthday,
+      birthDate,
       verified,
     } = req.body;
 
@@ -55,7 +55,7 @@ exports.signup = async function (req, res, next) {
       gender,
       birthYear,
       birthMonth,
-      birthday,
+      birthDate,
       verified,
     });
     res.status(201).json({
