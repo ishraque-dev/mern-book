@@ -1,13 +1,19 @@
-import Registration from './pages/Registration';
-
+import Login from './pages/Login';
+import RootLayout from './pages/RootLayout';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+const router = createBrowserRouter([
+  {
+    path: '/*',
+    element: <RootLayout />,
+    // errorElement: <ErrorPage />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+]);
 function App() {
-  return (
-    <div className="App">
-      {/* <i className="friends_suggestions_icon"></i> */}
-
-      <Registration />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

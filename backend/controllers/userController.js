@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const passwordHashing = require('../functions/hashPassword');
+const comparePassword = require('../functions/comparePassword');
 const generateUsername = require('../functions/generateUsername');
+const { generateJWT } = require('../functions/generateJWT');
 
 exports.usernameValidation = function (req, res, next) {
   if (req.body.firstName.length > 15 || req.body.firstName.length < 3) {
@@ -66,5 +68,35 @@ exports.signup = async function (req, res, next) {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+exports.checkUserExists = async function (req, res, next) {
+  const { email, password } = req.body;
+  try {
+    const isExists = await User.findOne({ email });
+
+    if (isExists) {
+      const comparedValue = await comparePassword(password, isExists.password);
+      if (comparedValue) {
+        const token = generateJWT(isExists._id);
+        res.status(200).json({
+          status: 'success',
+          message: 'Login successful',
+          data: Object.assign(isExists, { token: token }),
+        });
+      } else {
+        res.status(404).json({
+          status: 'error',
+          message: "Login failed  Password did't matched",
+        });
+      }
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'User does not exist',
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 };

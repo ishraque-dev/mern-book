@@ -17,3 +17,11 @@ export const signupValidationSchema = Yup.object({
     .required('Please enter your password'),
   gender: Yup.string().required('Please select your gender'),
 });
+export const loginPageValidationSchema = Yup.object({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Please enter your email address'),
+  password: Yup.string()
+    .min(8, 'Must be 8 characters')
+    .required('Please enter your password'),
+});

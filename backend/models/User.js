@@ -31,6 +31,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, 'Password is required'],
     },
+    token: {
+      type: String,
+    },
     picture: {
       type: String,
       trim: true,

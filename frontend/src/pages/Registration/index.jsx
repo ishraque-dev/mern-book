@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Input } from '../../components';
+import { Button, Input } from '../../components';
 import usePageTitle from '../../hooks/usePageTitle';
 import { signupValidationSchema } from '../../validations';
 import {
@@ -25,7 +25,7 @@ function Registration() {
     email: '',
     password: '',
     birthDate: new Date().getDate(),
-    birthMonth: months[new Date().getMonth() - 1],
+    birthMonth: months[new Date().getMonth()],
     birthYear: new Date().getFullYear(),
     gender: '',
   };
@@ -58,14 +58,18 @@ function Registration() {
     e.preventDefault();
     formik.handleSubmit();
   };
-  console.log(formik.values.birthMonth);
+
   return (
     <div className="flex h-screen w-full flex-wrap  items-center p-5 lg:justify-around">
       <div className="flex w-full flex-col items-start md:items-center lg:w-1/2 lg:justify-center">
-        <div className="mb-5  text-2xl font-bold text-primaryBlue lg:mb-10 lg:text-7xl">
+        <div className="mb-5  text-2xl font-bold text-primaryBlue md:text-4xl lg:mb-10 lg:text-7xl">
           mernbook
         </div>
-        <img src={signup} alt="" className="hidden md:block lg:block" />
+        <img
+          src="./imgs/signup.png"
+          alt=""
+          className="hidden md:block lg:block"
+        />
         <small className="hidden font-medium text-primaryBlue md:block lg:mt-20 lg:block">
           Mernbook helps you connect and share with the people in your life.
           Signup now!
@@ -140,7 +144,7 @@ function Registration() {
               className="border-none p-2 text-sm font-medium outline-none lg:w-[25%] lg:text-base "
               value={formik.birthMonth}
               onChange={formik.handleChange}
-              defaultValue={months[formik.values.birthMonth - 1]}
+              defaultValue={formik.values.birthMonth}
             >
               {months.map((month) => (
                 <option>{month}</option>
@@ -214,24 +218,30 @@ function Registration() {
           {formik.touched.gender && formik.errors.gender ? (
             <small className="text-red-500">{formik.errors.gender}</small>
           ) : null}
-          <button
-            type="submit"
-            className="w-full rounded-md bg-primaryBlue py-2 px-5 text-xl font-bold text-white hover:bg-[#0864df]"
-          >
-            Signup
-          </button>
+          <div className="flex w-full items-center justify-center">
+            <Button
+              type="submit"
+              className="w-[50%] rounded-md bg-primaryBlue py-2 px-5  text-xl font-bold text-white hover:bg-[#0864df] md:my-3 lg:w-full"
+            >
+              Signup
+            </Button>
+          </div>
         </form>
         {/* <Link to="#">Forgot password?</Link> */}
         <p className="text-center text-sm font-medium text-primaryBlue">
           Forgot Password?
         </p>
         <hr className=" border-1 border-[#D9D9D9]" />
-        <button
-          type="submit"
-          className="m-auto w-[50%] rounded-md bg-primaryGreen  py-2  text-base font-bold text-white hover:bg-[#25a10c] "
-        >
-          Already have one
-        </button>
+        <div className="flex w-full items-center justify-center">
+          <Link to="/login">
+            <Button
+              type="submit"
+              className="m-auto   rounded-md bg-primaryGreen  p-2  text-base font-bold text-white hover:bg-[#25a10c] "
+            >
+              Already have one
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
