@@ -70,7 +70,7 @@ exports.signup = async function (req, res, next) {
     console.log(error);
   }
 };
-exports.checkUserExists = async function (req, res, next) {
+exports.userLoginWithValidation = async function (req, res, next) {
   const { email, password } = req.body;
   try {
     const isExists = await User.findOne({ email });
@@ -87,13 +87,13 @@ exports.checkUserExists = async function (req, res, next) {
       } else {
         res.status(404).json({
           status: 'error',
-          message: "Login failed  Password did't matched",
+          message: 'Login failed incurrent password',
         });
       }
     } else {
       res.status(404).json({
         status: 'error',
-        message: 'User does not exist',
+        message: 'User does not exists. Check your email and try again',
       });
     }
   } catch (error) {

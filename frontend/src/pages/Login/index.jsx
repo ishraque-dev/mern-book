@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Input } from '../../components';
+import axios from 'axios';
 import usePageTitle from '../../hooks/usePageTitle';
 import { useFormik } from 'formik';
 import { loginPageValidationSchema } from '../../validations';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Login() {
   usePageTitle('login');
 
@@ -15,8 +18,32 @@ function Login() {
     validationSchema: loginPageValidationSchema,
     onSubmit: (values) => {
       console.log(values);
+      const { email, password } = values;
+      login(email, password);
     },
   });
+  async function login(email, password) {
+    try {
+      const { data } = await axios.post('http://127.0.0.1:8000/api/v1/login', {
+        email: email,
+        password: password,
+      });
+      console.log(data);
+    } catch (error) {
+      const err = await error.response.data.message;
+      console.log(err);
+      toast.error(err, {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  }
   return (
     <div className="flex h-screen w-full flex-col items-center  justify-around p-5 lg:flex-wrap">
       <div className="flex w-full flex-col items-start md:items-center lg:w-1/2 lg:justify-center">
@@ -69,6 +96,18 @@ function Login() {
             >
               Login
             </Button>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </div>
         </form>
         {/* <Link to="#">Forgot password?</Link> */}

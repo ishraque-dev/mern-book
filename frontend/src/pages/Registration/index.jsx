@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Button, Input } from '../../components';
+import { Button } from '../../components';
 import usePageTitle from '../../hooks/usePageTitle';
 import { signupValidationSchema } from '../../validations';
+import RegistrationForm from './RegistrationForm';
 import {
   generateDates,
   generateMonths,
@@ -78,7 +79,7 @@ function Registration() {
 
       <div className="flex flex-col gap-2 lg:w-[30%]">
         <h2 className="font-base mb-2  text-2xl text-[#20262E]">Signup</h2>
-        <form action="" className="" onSubmit={handleSubmit}>
+        {/* <form action="" className="" onSubmit={handleSubmit}>
           <Input
             input={{
               placeholder: 'Your first name',
@@ -153,7 +154,7 @@ function Registration() {
             <select
               name="birthYear"
               id=""
-              className="border-none p-2 text-sm font-medium outline-none lg:w-[20%] lg:text-base "
+              className="border-none p-2 text-sm font-medium outline-none lg:w-[25%] lg:text-base "
               value={formik.birthYear}
               onChange={formik.handleChange}
               defaultValue={years[formik.values.birthYear]}
@@ -226,7 +227,14 @@ function Registration() {
               Signup
             </Button>
           </div>
-        </form>
+        </form> */}
+        <RegistrationForm
+          handleSubmit={handleSubmit}
+          formik={formik}
+          dates={dates}
+          months={months}
+          years={years}
+        />
         {/* <Link to="#">Forgot password?</Link> */}
         <p className="text-center text-sm font-medium text-primaryBlue">
           Forgot Password?

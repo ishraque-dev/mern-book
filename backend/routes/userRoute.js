@@ -5,9 +5,9 @@ const {
   usernameValidation,
   emailValidation,
   signup,
-  checkUserExists,
+  userLoginWithValidation,
 } = require('../controllers/userController');
 
 router.route('/signup').post(usernameValidation, emailValidation, signup);
-router.route('/login').post(checkUserExists);
+router.route('/login').post(userLoginWithValidation);
 module.exports = router;
