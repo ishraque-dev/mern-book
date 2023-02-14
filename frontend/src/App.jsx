@@ -2,12 +2,12 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import RootLayout from './pages/RootLayout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { UserAuth, UserLoggedIn } from './routes/UserAuth';
+import { ProtectedHome, ProtectedAuthPages } from './routes/ProtectedRoutes';
 import Registration from './pages/Registration';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <UserLoggedIn />,
+    element: <ProtectedAuthPages />,
     children: [
       {
         index: true, // (/)
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   },
 
   {
-    element: <UserAuth />,
+    element: <ProtectedHome />,
     children: [
       {
         path: 'home',
