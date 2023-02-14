@@ -1,15 +1,21 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userAuthActions } from '../../features/user/userAuth';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Button, Input } from '../../components';
+import { Button, Input } from '../../components/UI';
 import axios from 'axios';
 import usePageTitle from '../../hooks/usePageTitle';
 import { useFormik } from 'formik';
 import { loginPageValidationSchema } from '../../validations';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-function Login() {
-  usePageTitle('login');
 
+function Login() {
+  const dispatch = useDispatch();
+  const userCredentials = useSelector((state) => state.auth.userCredentials);
+  usePageTitle('login');
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,7 +23,6 @@ function Login() {
     },
     validationSchema: loginPageValidationSchema,
     onSubmit: (values) => {
-      console.log(values);
       const { email, password } = values;
       login(email, password);
     },
@@ -28,7 +33,10 @@ function Login() {
         email: email,
         password: password,
       });
-      console.log(data);
+      // console.log(data); // logged in user data
+      navigate('/home'); // navigate to home
+      dispatch(userAuthActions.login(data));
+      localStorage.setItem('user', JSON.stringify(data));
     } catch (error) {
       const err = await error.response.data.message;
       console.log(err);
@@ -116,7 +124,7 @@ function Login() {
         </p>
         <hr className=" border-1 border-[#D9D9D9]" />
         <div className="flex w-full items-center justify-center">
-          <Link to="/">
+          <Link to="/signup">
             <Button
               type="submit"
               className="m-auto rounded-md bg-primaryGreen  p-2  text-base font-bold text-white hover:bg-[#25a10c] "

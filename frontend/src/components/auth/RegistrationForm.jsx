@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Button } from '../../components';
+import { Input, Button } from '../UI';
 function RegistrationForm({ handleSubmit, formik, dates, months, years }) {
   return (
     <form action="" className="" onSubmit={handleSubmit}>

@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { Button } from '../../components';
+import { Button } from '../../components/UI';
 import usePageTitle from '../../hooks/usePageTitle';
 import { signupValidationSchema } from '../../validations';
-import RegistrationForm from './RegistrationForm';
+import { RegistrationForm } from '../../components/auth';
 import {
   generateDates,
   generateMonths,
@@ -241,11 +241,8 @@ function Registration() {
         </p>
         <hr className=" border-1 border-[#D9D9D9]" />
         <div className="flex w-full items-center justify-center">
-          <Link to="/login">
-            <Button
-              type="submit"
-              className="m-auto   rounded-md bg-primaryGreen  p-2  text-base font-bold text-white hover:bg-[#25a10c] "
-            >
+          <Link to="/">
+            <Button className="m-auto   rounded-md bg-primaryGreen  p-2  text-base font-bold text-white hover:bg-[#25a10c] ">
               Already have one
             </Button>
           </Link>
