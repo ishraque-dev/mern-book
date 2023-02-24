@@ -4,6 +4,7 @@ const comparePassword = require('../utils/comparePassword');
 const generateUsername = require('../utils/generateUsername');
 const { generateJWT } = require('../utils/generateJWT');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.usernameValidation = function (req, res, next) {
   if (req.body.firstName.length > 15 || req.body.firstName.length < 3) {
@@ -18,10 +19,7 @@ exports.usernameValidation = function (req, res, next) {
 exports.emailValidation = async function (req, res, next) {
   const regex = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/.test(req.body.email);
   if (!regex) {
-    return res.status(400).json({
-      status: 'Bad Request',
-      message: 'Invalid email address',
-    });
+    return next(new AppError('Invalid email address', 400));
   }
 
   const existOne = await User.findOne({ email: req.body.email });
@@ -68,7 +66,7 @@ exports.signup = catchAsync(async (req, res) => {
     },
   });
 });
-exports.userLoginWithValidation = catchAsync(async (req, res) => {
+exports.userLoginWithValidation = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   const isExists = await User.findOne({ email });
 
@@ -82,15 +80,11 @@ exports.userLoginWithValidation = catchAsync(async (req, res) => {
         data: Object.assign(isExists, { token: token }),
       });
     } else {
-      res.status(400).json({
-        status: 'error',
-        message: 'Login failed incurrent password',
-      });
+      return next(new AppError('Login failed incurrent password', 400));
     }
   } else {
-    res.status(404).json({
-      status: 'error',
-      message: 'User does not exists. Check your email and try again',
-    });
+    return next(
+      new AppError('User does not exists. Check your email and try again', 404)
+    );
   }
 });
