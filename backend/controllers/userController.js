@@ -1,8 +1,7 @@
 const User = require('../models/User');
-const passwordHashing = require('../utils/hashPassword');
 const comparePassword = require('../utils/comparePassword');
 const generateUsername = require('../utils/generateUsername');
-const { generateJWT } = require('../utils/generateJWT');
+const { createAndSendToken } = require('../utils/createAndSendToken');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -45,27 +44,22 @@ exports.signup = catchAsync(async (req, res) => {
     verified,
   } = req.body;
 
-  const encryptedPassword = await passwordHashing(password);
   const username = await generateUsername(firstName);
   const user = await User.create({
     firstName,
     lastName,
     username,
     email,
-    password: encryptedPassword,
+    password,
     gender,
     birthYear,
     birthMonth,
     birthDate,
     verified,
   });
-  res.status(201).json({
-    message: 'created successfully',
-    data: {
-      user,
-    },
-  });
+  await createAndSendToken(user, 201, res);
 });
+
 exports.userLoginWithValidation = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   const isExists = await User.findOne({ email });
@@ -73,12 +67,7 @@ exports.userLoginWithValidation = catchAsync(async (req, res, next) => {
   if (isExists) {
     const comparedValue = await comparePassword(password, isExists.password);
     if (comparedValue) {
-      const token = generateJWT(isExists._id);
-      res.status(200).json({
-        status: 'success',
-        message: 'Login successful',
-        data: Object.assign(isExists, { token: token }),
-      });
+      await createAndSendToken(isExists, 200, res);
     } else {
       return next(new AppError('Login failed incurrent password', 400));
     }
