@@ -16,3 +16,7 @@ body {
   background: var(--primary-bg-white);
   font-family: 'Noto Sans', sans-serif;
 }
+
+.top {
+  box-shadow: 0 -5px 8px -7px #525252;
+}
