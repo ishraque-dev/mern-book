@@ -1,7 +1,7 @@
 import React from 'react';
 import { SmallCard } from '../UI';
 import { FaUserFriends, FaPager } from 'react-icons/fa';
-// import { MdGroups2 } from 'react-icons/md';
+
 function LeftSidePanel() {
   return (
     <div className="flex h-[500px] w-[25%] flex-col gap-3">
