@@ -1,2 +1,3 @@
 import Header from './Header';
-export { Header };
+import LeftSidePanel from './LeftSidePanel';
+export { Header, LeftSidePanel };

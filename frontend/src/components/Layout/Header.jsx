@@ -47,7 +47,7 @@ function Header() {
         <div className="top absolute bottom-0 left-0 right-0 m-auto flex w-full  items-center  justify-around md:relative md:flex md:w-[40%] md:shadow-none">
           {/* Middle */}
           {navigationBox.map((item) => (
-            <div className="cursor-pointer rounded-lg p-3 transition duration-150 hover:bg-[#DDDDDD]">
+            <div className="cursor-pointer rounded-lg p-3 transition duration-150 hover:bg-[#E8F9FD]">
               <item.icon
                 key={item.name}
                 className="text-2xl  text-[#3C4048] "
@@ -57,17 +57,17 @@ function Header() {
         </div>
         <div className="flex w-[30%] items-center justify-end gap-2 md:gap-5">
           {/* right */}
-          <div className=" rounded-full bg-[#DDDDDD] p-1 md:p-2">
+          <div className=" rounded-full bg-[#E8F9FD] p-1 md:p-2">
             <BsMessenger className="cursor-pointer  text-xl text-[#3C4048] md:text-2xl" />
           </div>
-          <div className="relative rounded-full bg-[#DDDDDD] p-1 md:p-2">
+          <div className="relative rounded-full bg-[#E8F9FD] p-1 md:p-2">
             {/* Notification */}
             <div className="absolute -top-1 -left-1 h-4 w-4 rounded-full border border-black bg-red-500 text-center md:h-5 md:w-5">
               <p className="text-xs font-bold leading-4 text-white">2</p>
             </div>
             <MdNotifications className="cursor-pointer  text-xl text-[#3C4048] md:text-2xl " />
           </div>
-          <div className="max-w-[30px] overflow-hidden rounded-full bg-[#DDDDDD] md:max-w-[40px] ">
+          <div className="max-w-[30px] overflow-hidden rounded-full bg-[#E8F9FD] md:max-w-[40px] ">
             {/* <FaUserCircle className="cursor-pointer  text-xl text-[#3C4048]  md:text-2xl" /> */}
             {/* user image */}
             <img
