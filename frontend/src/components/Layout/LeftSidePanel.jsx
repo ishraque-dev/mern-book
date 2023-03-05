@@ -1,5 +1,5 @@
 import React from 'react';
-import { SmallCard } from '../UI';
+import { SmallCard, MediumCard } from '../UI';
 import { FaUserFriends, FaPager } from 'react-icons/fa';
 
 function LeftSidePanel() {
@@ -11,6 +11,7 @@ function LeftSidePanel() {
         description="See all Friends"
       />
       <SmallCard Icon={FaPager} title="Pages" description="All Pages" />
+      <MediumCard />
     </div>
   );
 }
